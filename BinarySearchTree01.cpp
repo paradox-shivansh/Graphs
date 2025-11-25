@@ -94,6 +94,56 @@ bool search(Node* root, int key) {
     }
 }
 
+// FIND MIN
+
+Node* findMin(Node* root){
+    if (!root) return NULL;
+    while(root->left) root = root->left;
+    return root;
+}
+// DELETION
+
+Node* del(Node* root, int key){
+    if (!root) return NULL;
+
+    // Finding the node
+    if (key < root->data){
+        root->left = del(root->left , key);
+        return root;
+    }else if (key > root->data){
+        root->right = del(root->right , key);
+        return root;
+    }
+
+
+    // Leaf node
+    if(!root->left && !root->right){
+        delete root;
+        return NULL;
+        // Every recursive call to deleteNode() must return a Node* 
+        //so the parent node can correctly update its left/right pointer.
+    }
+
+    // Only one right child
+    if(!root->left && root->right){
+        Node* rightChild = root->right;
+        delete root;
+        return rightChild;
+    }
+
+    // Only one left child
+    if(root->left && !root->right){
+        Node* leftChild = root->left;
+        delete root;
+        return leftChild;
+    }
+
+    // Two children
+    Node* successor = findMin(root->right);
+    root->right = del(root->right , successor->data);
+    return root;
+
+}
 
 
 int main(){
@@ -114,5 +164,11 @@ int main(){
     search(root , 20);
     search(root , 12);
     search(root , 19);
+
+    del(root , 12);
+
+    levelOder(root);
+    cout << endl;
+
     
 }

@@ -18,10 +18,7 @@ class Node{
             this->data=data;
             this->left = NULL;
             this->right = NULL;
-        }  
-
-
-    
+        }     
 };
 
 Node* buildTree(){
