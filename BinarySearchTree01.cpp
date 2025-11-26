@@ -95,12 +95,21 @@ bool search(Node* root, int key) {
 }
 
 // FIND MIN
-
 Node* findMin(Node* root){
     if (!root) return NULL;
     while(root->left) root = root->left;
     return root;
 }
+
+// FIND MAX
+Node* findMax(Node* root){
+    if (!root) return NULL;
+    while(root->right) root = root->right;
+    return root;
+}
+
+
+
 // DELETION
 
 Node* del(Node* root, int key){
@@ -139,7 +148,7 @@ Node* del(Node* root, int key){
     }
 
     // Two children
-    Node* successor = findMin(root->right);
+    Node* successor = findMin(root->right); 
     root->right = del(root->right , successor->data);
     return root;
 
