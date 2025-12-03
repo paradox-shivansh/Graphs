@@ -97,7 +97,7 @@ bool search(Node* root, int key) {
 // FIND MIN
 Node* findMin(Node* root){
     if (!root) return NULL;
-    while(root->left) root = root->left;
+    while(root->left ) root = root->left;
     return root;
 }
 
